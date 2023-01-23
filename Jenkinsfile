@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/admin') {
-                        sh 'ddocker-compose up -d backend .'
+                        sh 'docker-compose up -d backend .'
                         sh 'docker-compose up -d queue .'
                         sh 'docker-compose up -d db .'
                     }
