@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/admin') {
+                    dir('/var/jenkins_home/workspace/admin') {
                         sh 'docker build -f Dockerfile -t backend .'
                         sh 'docker build -f Dockerfile -t queue .'
                         sh 'docker build -t db -f db-Dockerfile .'
@@ -20,7 +20,7 @@ pipeline {
         stage('Run Services') {
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/admin') {
+                    dir('/var/jenkins_home/workspace/admin') {
                         sh 'docker run -p 8000:8000 -v "$PWD":/app --name backend backend python manage.py runserver 0.0.0.0:8000'
                         sh 'docker run --name queue queue python -u consumer.py'
                         sh 'docker run -p 33066:3306 -v "$PWD/.dbdata":/var/lib/mysql --name db -e MYSQL_DATABASE=admin -e MYSQL_USER=root -e MYSQL_PASSWORD=root -e MYSQL_ROOT_PASSWORD=root db'
