@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker { 
-            image 'jenkins/jenkins:lts' 
-            args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+            image 'python:3.8' 
+            //args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
     stages {
