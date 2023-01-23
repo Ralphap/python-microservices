@@ -6,13 +6,21 @@ pipeline {
         }
     }
     stages {
+        stage('Initialize'){
+            steps {
+                script {
+                    def dockerHome = tool 'myDocker'
+                    env.PATH = "${dockerHome}/bin:${env.PATH}"
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/admin') {
-                        sh 'docker-compose up -d backend .'
-                        sh 'docker-compose up -d queue .'
-                        sh 'docker-compose up -d db .'
+                        sh 'docker compose up -d backend .'
+                        sh 'docker compose up -d queue .'
+                        sh 'docker compose up -d db .'
                     }
                 }
             }
