@@ -1,6 +1,22 @@
 pipeline {
+    environment {
+        PATH = "$PATH:/usr/local/bin/docker-compose"
+    }
+
     agent any
     stages {
+            stage('verify tooling'){
+            steps {
+            sh '''
+                docker version
+                docker info
+                docker-compose version
+                curl --version
+                '''
+
+
+            }
+        }
         stage('Initialize'){
             steps {
                 script {
