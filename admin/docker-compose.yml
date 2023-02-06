@@ -4,6 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      image: apmedia/backend:latest
     command: 'python manage.py runserver 0.0.0.0:8000'
     ports:
       - 8000:8000
@@ -17,6 +18,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      image: apmedia/queue:latest
     command: 'python -u consumer.py'
     depends_on:
       - db

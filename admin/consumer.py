@@ -5,7 +5,7 @@ django.setup()
 
 from products.models import Product
 
-params = pika.URLParameters('your_rabbitmq_url')
+params = pika.URLParameters('amqps://yxkzlipj:ewKx_gGURTsQdGe_qWUxp1pEEI9Z8Njj@fly.rmq.cloudamqp.com/yxkzlipj')
 
 connection = pika.BlockingConnection(params)
 

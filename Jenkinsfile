@@ -5,16 +5,18 @@ pipeline {
 
     agent any
     stages {
-            stage('verify tooling'){
+        stage('Login to Azure') {
             steps {
-            sh '''
+                withCredentials([azureServicePrincipal(credentialsId: '4da4a74e-271e-41fa-982f-924ade10f5dc')]) {
+                    sh "az login --service-principal -u ${AZURE_CLIENT_ID} -p ${AZURE_CLIENT_SECRET} --tenant ${AZURE_TENANT_ID}"
+                }
+            }
+        }
+        stage('verify tooling'){
+            steps {
+                sh '''
                 docker version
-                docker info
-                docker-compose version
-                curl --version
                 '''
-
-
             }
         }
         stage('Initialize'){
@@ -29,9 +31,9 @@ pipeline {
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/admin') {
-                        sh 'docker-compose up -d backend .'
-                        sh 'docker-compose up -d queue .'
-                        sh 'docker-compose up -d db .'
+                    sh 'docker-compose up -d db'
+                    sh "sleep 50"
+                    sh 'docker-compose up'
                     }
                 }
             }
