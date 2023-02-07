@@ -23,7 +23,6 @@ services:
 
   db:
     image: mysql:5.7.22
-    restart: always
     environment:
       MYSQL_DATABASE: admin
       MYSQL_USER: root
