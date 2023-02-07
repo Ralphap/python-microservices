@@ -31,5 +31,7 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - .dbdata:/var/lib/mysql
+    args:
+      - "--ignore-db-dir=lost+found"
     ports:
       - 33066:3306
