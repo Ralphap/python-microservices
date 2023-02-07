@@ -32,6 +32,5 @@ services:
     command: --tmpdir=/var/lib/docker/tmp
     volumes:
       - .dbdata:/var/lib/mysql
-      - /var/lib/docker/tmp:/var/lib/mysql/
     ports:
       - 33066:3306
