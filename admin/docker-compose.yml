@@ -23,11 +23,13 @@ services:
 
   db:
     image: mysql:5.7.22
+    restart: always
     environment:
       MYSQL_DATABASE: admin
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
+      TMP_DIR: var/lib/docker/tmp
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
