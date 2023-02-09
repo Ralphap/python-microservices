@@ -1,14 +1,10 @@
 {
-	"folders": [
-		{
-			"path": ".."
-		},
-		{
-			"path": "../../react-crud"
-		},
-		{
-			"path": "../../Desktop/microservices/microservices"
-		}
-	],
-	"settings": {}
+    "folders": [
+        {
+            "path": ".."
+        },
+        {
+            "path": "../../react-crud"
+        }
+    ]
 }
