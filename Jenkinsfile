@@ -1,8 +1,4 @@
 pipeline {
-    environment {
-        PATH = "$PATH:/usr/local/bin/docker-compose"
-    }
-
     agent any
     stages {
         stage('Login to Azure') {
@@ -12,7 +8,7 @@ pipeline {
                 }
             }
         }
-        stage('verify tooling'){
+        stage('Verify Tooling'){
             steps {
                 sh '''
                 docker version
@@ -27,24 +23,37 @@ pipeline {
                 }
             }
         }
-        stage('Build Admin') {
+        stage('React Build') {
             steps {
                 script {
-                    dir('/var/lib/jenkins/workspace/microservice_pipeline/admin') {
-                    sh 'docker-compose up -d db'
-                    sh "sleep 5"
-                    sh 'docker-compose up'
+                    dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
+                        sh 'npm install'
+                        sh 'npm run build'
+                        sh 'cp -r build/* /var/lib/jenkins/workspace/microservice_pipeline/admin/admin/static'
+                        sh 'cd /var/lib/jenkins/workspace/microservice_pipeline/admin'
+                        sh 'python manage.py collectstatic --noinput'
                     }
                 }
             }
         }
-                stage('Build Main') {
+        stage('Build Admin') {
+            steps {
+                script {
+                    dir('/var/lib/jenkins/workspace/microservice_pipeline/admin') {
+                        sh 'docker-compose up -d db'
+                        sh "sleep 5"
+                        sh 'docker-compose up'
+                    }
+                }
+            }
+        }
+        stage('Build Main') {
             steps {
                 script {
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/main') {
-                    sh 'docker-compose up -d db'
-                    sh "sleep 5"
-                    sh 'docker-compose up'
+                        sh 'docker-compose up -d db'
+                        sh "sleep 5"
+                        sh 'docker-compose up'
                     }
                 }
             }
