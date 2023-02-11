@@ -5,6 +5,15 @@
         },
         {
             "path": "../../react-crud"
+        },
+        {
+            "path": "../../notification-microservice"
+        },
+        {
+            "path": "../../IPAFFS Pipeline/pipeline-library"
+        },
+        {
+            "path": "../../util"
         }
     ]
 }
