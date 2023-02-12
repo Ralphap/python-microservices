@@ -23,21 +23,21 @@ pipeline {
                 }
             }
         }
-stage('React Build') {
-    agent {
-        dockerfile true
-    }
-    steps {
-        script {
-            dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
-                sh 'npm run build'
-                sh 'cp -r build/* /var/lib/jenkins/workspace/microservice_pipeline/admin/admin/static'
-                sh 'cd /var/lib/jenkins/workspace/microservice_pipeline/admin'
-                sh 'python manage.py collectstatic --noinput'
+        stage('React Build') {
+            agent {
+                dockerfile true
+            }
+            steps {
+                script {
+                    dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
+                        sh 'npm run build'
+                        sh 'cp -r build/* /var/lib/jenkins/workspace/microservice_pipeline/admin/admin/static'
+                        sh 'cd /var/lib/jenkins/workspace/microservice_pipeline/admin'
+                        sh 'python manage.py collectstatic --noinput'
+                    }
+                }
             }
         }
-    }
-}
         stage('Build Admin') {
             steps {
                 script {
@@ -61,6 +61,7 @@ stage('React Build') {
             }
         }
     }
+}
 
 
 
