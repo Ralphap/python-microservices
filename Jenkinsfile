@@ -23,13 +23,23 @@ pipeline {
                 }
             }
         }
-        stage('React Build') {
-            agent {
-                dockerfile true
-            }
+stage('React Build') {
+    agent {
+        docker {
+            image 'node:18.13.0'
+            args '-u root:root'
+            reuseNode true
+        }
+    }
+
             steps {
                 script {
+                    environment {
+                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
+                    }
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
+                        sh 'npm install'
+                        env.NODE_OPTIONS="--openssl-legacy-provider"
                         sh 'npm run build'
                         sh 'cp -r build/* /var/lib/jenkins/workspace/microservice_pipeline/admin/admin/static'
                         sh 'cd /var/lib/jenkins/workspace/microservice_pipeline/admin'
@@ -60,6 +70,8 @@ pipeline {
                 }
             }
         }
+    }
+}
     }
 }
 
