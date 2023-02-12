@@ -72,7 +72,7 @@ stage('React Build') {
         }
     }
 }
-    }
+
 }
 
 
