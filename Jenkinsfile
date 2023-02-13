@@ -39,12 +39,20 @@ stage('React Build') {
                     }
                     dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
                         sh 'npm install'
+                        sh 'apt update -y'
+                        sh 'apt install python -y'
                         env.NODE_OPTIONS="--openssl-legacy-provider"
                         sh 'npm run build'
-                        sh 'cp -r build/* /var/lib/jenkins/workspace/microservice_pipeline/admin/admin/static'
-                        sh 'cd /var/lib/jenkins/workspace/microservice_pipeline/admin'
-                        sh 'python manage.py collectstatic --noinput'
+                        sh 'npm start'
+                        sh 'pwd'
+                        
                     }
+                    dir('/var/lib/jenkins/workspace/microservice_pipeline/admin'){
+                    sh 'pwd'
+                    sh 'ls'
+                    sh 'python manage.py collectstatic --noinput'
+                    }
+                    
                 }
             }
         }
@@ -71,8 +79,6 @@ stage('React Build') {
             }
         }
     }
-}
-
 }
 
 
