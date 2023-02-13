@@ -23,6 +23,11 @@ pipeline {
                 }
             }
         }
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t myimage -f ./Dockerfile .'
+            }
+        }
         stage('React Build') {
         agent {
             docker {
