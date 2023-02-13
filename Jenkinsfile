@@ -23,14 +23,16 @@ pipeline {
                 }
             }
         }
-stage('React Build') {
-    agent {
-        docker {
-            image 'node:18.13.0'
-            args '-u root:root'
-            reuseNode true
+        stage('React Build') {
+        agent {
+            docker {
+                image 'python:3.9'
+                args '-u root:root'
+                reuseNode true
+                dockerfile './Dockerfile'
+            }
         }
-    }
+
 
             steps {
                 script {
