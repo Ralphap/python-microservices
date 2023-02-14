@@ -13,19 +13,19 @@ RUN apt-get update && apt-get install -y npm
 
 # Install python and dependencies
 RUN apt-get update && apt-get install -y python3 python3-pip
-COPY requirements.txt /app/admin/requirements.txt
+
 WORKDIR /app/admin
+
 RUN pip3 install -r requirements.txt
 
 # Install packages for the React app
 WORKDIR /app/react-crud
 RUN npm install
 
+
 # Set environment variable
 ENV NODE_OPTIONS="--openssl-legacy-provider"
 
-# Build and start the React app
-WORKDIR /app/react-crud
 RUN npm run build
 
 
