@@ -27,8 +27,14 @@ ENV NODE_OPTIONS="--openssl-legacy-provider"
 # Build and start the React app
 WORKDIR /app/react-crud
 RUN npm run build
-RUN npm start
+
 
 # Collect static files for the Django app
 WORKDIR /app/admin
 RUN python3 manage.py collectstatic --noinput
+
+EXPOSE 3000
+
+# Start the app
+CMD ["npm", "start"]
+
