@@ -33,6 +33,8 @@ RUN npm run build
 WORKDIR /app/admin
 RUN python3 manage.py collectstatic --noinput
 
+WORKDIR /app/react-crud
+
 EXPOSE 3000
 
 # Start the app
