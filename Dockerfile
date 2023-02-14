@@ -35,8 +35,10 @@ RUN python3 manage.py collectstatic --noinput
 
 WORKDIR /app/react-crud
 
+RUN npm install serve -g
+
 EXPOSE 3000
 
 # Start the app
-CMD ["npm", "start"]
+CMD ["serve", "-s", "."]
 
