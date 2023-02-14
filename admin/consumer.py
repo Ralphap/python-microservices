@@ -1,5 +1,7 @@
 import pika, json, os, django
 
+import os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "admin.settings")
 django.setup()
 
