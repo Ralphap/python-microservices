@@ -29,40 +29,12 @@ pipeline {
             }
         }
         stage('React Build') {
-        agent {
-            docker {
-                image 'python:3.9'
-                args '-u root:root'
-                reuseNode true
-                dockerfile './Dockerfile'
+            steps{
+                sh 'docker run -d -p 80:3000 myimage'
             }
         }
 
 
-            steps {
-                script {
-                    environment {
-                        NPM_CONFIG_CACHE = "${WORKSPACE}/.npm"
-                    }
-                    dir('/var/lib/jenkins/workspace/microservice_pipeline/react-crud') {
-                        sh 'npm install'
-                        sh 'apt update -y'
-                        sh 'apt install python -y'
-                        env.NODE_OPTIONS="--openssl-legacy-provider"
-                        sh 'npm run build'
-                        sh 'npm start'
-                        sh 'pwd'
-                        
-                    }
-                    dir('/var/lib/jenkins/workspace/microservice_pipeline/admin'){
-                    sh 'pwd'
-                    sh 'ls'
-                    sh 'python manage.py collectstatic --noinput'
-                    }
-                    
-                }
-            }
-        }
         stage('Build Admin') {
             steps {
                 script {
@@ -87,6 +59,8 @@ pipeline {
         }
     }
 }
+
+
 
 
 
