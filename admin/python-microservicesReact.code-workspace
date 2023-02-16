@@ -10,10 +10,16 @@
             "path": "../../notification-microservice"
         },
         {
-            "path": "../../IPAFFS Pipeline/pipeline-library"
+            "path": "../../Desktop/microservices"
         },
         {
-            "path": "../../util"
+            "path": "../../Desktop/main"
+        },
+        {
+            "path": "../../Azuredevops-IPAFFS-repo/DEFRA-EUX-IMP"
+        },
+        {
+            "path": "../../IPAFFS Pipeline/pipeline-library"
         }
     ]
 }
