@@ -3,7 +3,7 @@ import pika, json
 params = pika.URLParameters('amqps://yxkzlipj:ewKx_gGURTsQdGe_qWUxp1pEEI9Z8Njj@fly.rmq.cloudamqp.com/yxkzlipj')
 
 
-params.heartbeat = 240
+params.heartbeat = 900
 
 connection = pika.BlockingConnection(params)
 
